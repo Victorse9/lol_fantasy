@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_varias/demacia.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0f102c" height="719.0" layoutX="-8.0" layoutY="-9.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" width="1307.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="362.0" layoutX="155.0" layoutY="200.0" opacity="0.7" stroke="WHITE" strokeType="INSIDE" width="963.0" />
+      <ImageView fx:id="imgE1" fitHeight="85.0" fitWidth="92.0" layoutX="242.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/betis.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE6" fitHeight="85.0" fitWidth="92.0" layoutX="246.0" layoutY="338.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/dwg.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE11" fitHeight="85.0" fitWidth="92.0" layoutX="242.0" layoutY="452.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/emonkeyz.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE2" fitHeight="85.0" fitWidth="92.0" layoutX="418.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/g2a.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE7" fitHeight="85.0" fitWidth="92.0" layoutX="418.0" layoutY="338.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/fpx.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE12" fitHeight="85.0" fitWidth="92.0" layoutX="419.0" layoutY="445.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/giants.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE3" fitHeight="85.0" fitWidth="92.0" layoutX="594.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/invictus.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE8" fitHeight="85.0" fitWidth="92.0" layoutX="594.0" layoutY="338.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/liquid.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE13" fitHeight="85.0" fitWidth="92.0" layoutX="594.0" layoutY="449.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/pain.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE4" fitHeight="85.0" fitWidth="92.0" layoutX="768.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/queso.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE9" fitHeight="85.0" fitWidth="92.0" layoutX="770.0" layoutY="338.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/s2v.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE14" fitHeight="85.0" fitWidth="92.0" layoutX="770.0" layoutY="446.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/riders.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE5" fitHeight="85.0" fitWidth="92.0" layoutX="944.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/t1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE10" fitHeight="85.0" fitWidth="92.0" layoutX="943.0" layoutY="341.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/tsm.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgE15" fitHeight="85.0" fitWidth="92.0" layoutX="946.0" layoutY="444.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_escudos/ucam.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="155.0" layoutY="155.0" text="ESCOGE EL ESCUDO DE TU EQUIPO:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <Label layoutX="155.0" layoutY="105.0" text="NOMBRE DE TU EQUIPO:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <TextField fx:id="txtNombreEquipo" layoutX="386.0" layoutY="99.0" prefHeight="39.0" prefWidth="287.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <ImageView fx:id="img1" fitHeight="97.0" fitWidth="105.0" layoutX="236.0" layoutY="224.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img2" fitHeight="97.0" fitWidth="105.0" layoutX="408.0" layoutY="224.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img3" fitHeight="97.0" fitWidth="105.0" layoutX="584.0" layoutY="224.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img4" fitHeight="97.0" fitWidth="105.0" layoutX="760.0" layoutY="224.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img5" fitHeight="97.0" fitWidth="105.0" layoutX="936.0" layoutY="224.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img6" fitHeight="97.0" fitWidth="105.0" layoutX="236.0" layoutY="332.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img7" fitHeight="97.0" fitWidth="105.0" layoutX="408.0" layoutY="332.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img8" fitHeight="97.0" fitWidth="105.0" layoutX="584.0" layoutY="332.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img9" fitHeight="97.0" fitWidth="105.0" layoutX="760.0" layoutY="332.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img10" fitHeight="97.0" fitWidth="105.0" layoutX="936.0" layoutY="332.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img11" fitHeight="97.0" fitWidth="105.0" layoutX="236.0" layoutY="441.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img12" fitHeight="97.0" fitWidth="105.0" layoutX="408.0" layoutY="441.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img13" fitHeight="97.0" fitWidth="105.0" layoutX="584.0" layoutY="441.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img14" fitHeight="97.0" fitWidth="105.0" layoutX="760.0" layoutY="440.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="img15" fitHeight="97.0" fitWidth="105.0" layoutX="936.0" layoutY="441.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../imagenes_varias/marconeon.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="521.0" layoutY="592.0" mnemonicParsing="false" onAction="#crearEquipo" prefHeight="51.0" prefWidth="232.0" style="-fx-background-color: #0F102C #0F102C;" text="EMPEZAR LIGA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect></Button>
+      <Label layoutX="508.0" layoutY="30.0" text="CREA TU NUEVO EQUIPO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <ImageView fitHeight="60.0" fitWidth="79.0" layoutX="27.0" layoutY="588.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_varias/flecha.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

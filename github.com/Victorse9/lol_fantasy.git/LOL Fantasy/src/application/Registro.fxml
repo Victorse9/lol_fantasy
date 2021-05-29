@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RegistroController">
+   <children>
+      <ImageView fitHeight="725.0" fitWidth="1329.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/LOL%20FANTASY/imagenes%20varias/fondoAzul.jpg" />
+         </image>
+      </ImageView>
+      <PasswordField fx:id="txtContraseña1" layoutX="530.0" layoutY="299.0" prefHeight="39.0" prefWidth="270.0" promptText="Contraseña">
+         <font>
+            <Font size="18.0" />
+         </font></PasswordField>
+      <TextField fx:id="txtUsuario" layoutX="530.0" layoutY="244.0" prefHeight="39.0" prefWidth="270.0" promptText="Nombre usuario">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button layoutX="530.0" layoutY="407.0" mnemonicParsing="false" onAction="#registrarUsuario" prefHeight="39.0" prefWidth="270.0" style="-fx-background-color: #22208b;" text="CREAR CUENTA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
+      <Button layoutX="973.0" layoutY="479.0" mnemonicParsing="false" onAction="#volver" prefHeight="25.0" prefWidth="149.0" text="VOLVER" />
+      <PasswordField fx:id="txtContraseña2" layoutX="530.0" layoutY="353.0" prefHeight="39.0" prefWidth="270.0" promptText="Confirmar contraseña">
+         <font>
+            <Font size="18.0" />
+         </font></PasswordField>
+   </children>
+</AnchorPane>

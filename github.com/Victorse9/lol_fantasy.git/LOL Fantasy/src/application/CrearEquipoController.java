@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +28,8 @@ public class CrearEquipoController {
 	private TextField txtNombreEquipo;
 	private String imgId, escudo, nombreUsuario, nombreEquipo;
 	private Conexion conexion = new Conexion();
+	@FXML
+	private Button btnEmpezar;
 
 	public CrearEquipoController(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
@@ -100,10 +103,10 @@ public class CrearEquipoController {
 			escudo = "liquid";
 		}
 		if (img9.isVisible()) {
-			escudo = "s2v";
+			escudo = "lsb";
 		}
 		if (img10.isVisible()) {
-			escudo = "tsm";
+			escudo = "drx";
 		}
 		if (img11.isVisible()) {
 			escudo = "emonkeyz";
@@ -112,7 +115,7 @@ public class CrearEquipoController {
 			escudo = "giants";
 		}
 		if (img13.isVisible()) {
-			escudo = "pain";
+			escudo = "omg";
 		}
 		if (img14.isVisible()) {
 			escudo = "riders";
@@ -246,4 +249,13 @@ public class CrearEquipoController {
 		}
 	}
 
+	@FXML
+	public void mouseEntered(MouseEvent e) {
+		btnEmpezar.setStyle("-fx-background-color: #1E1F39");
+	}
+	
+	@FXML
+	public void mouseExited(MouseEvent e) { 	 
+		btnEmpezar.setStyle("-fx-background-color: #0F102C");
+	}
 }

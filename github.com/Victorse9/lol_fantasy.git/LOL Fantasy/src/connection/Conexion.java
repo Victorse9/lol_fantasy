@@ -180,12 +180,10 @@ public class Conexion {
 				pStatement.setString(2, contraseña); // CONTRASEÑA
 				try {
 					pStatement.executeUpdate();
+					JOptionPane.showMessageDialog(null, "Usuario creado.");
 				} catch (SQLException sqle) {
 					JOptionPane.showMessageDialog(null, "Este nombre de usuario ya existe");
-					throw sqle;
 				}
-
-				JOptionPane.showMessageDialog(null, "Usuario creado.");
 				connection.commit();
 			}
 		} catch (SQLException e) {
@@ -387,16 +385,16 @@ public class Conexion {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		String[] escudoEquipo= new String[2];
+		String[] escudoEquipo = new String[2];
 		String sentenciaSqle = "SELECT NOMBRE_EQUIPO, ESCUDO FROM REGISTRO WHERE USUARIO = ?";
 		try {
 			connection = connectionByProp();
 			preparedStatement = connection.prepareStatement(sentenciaSqle);
 			preparedStatement.setString(1, usuario);
 			resultSet = preparedStatement.executeQuery();
-			while(resultSet.next()) {
-				escudoEquipo [0]= resultSet.getString("NOMBRE_EQUIPO");
-				escudoEquipo [1]= resultSet.getString("ESCUDO");
+			while (resultSet.next()) {
+				escudoEquipo[0] = resultSet.getString("NOMBRE_EQUIPO");
+				escudoEquipo[1] = resultSet.getString("ESCUDO");
 			}
 		} catch (SQLException e) {
 			throw e;
@@ -478,9 +476,10 @@ public class Conexion {
 
 		return Jugador;
 	}
-	
+
 	/**
 	 * Devuelve el jugador indicado
+	 * 
 	 * @param jugador
 	 * @param connection
 	 * @return
@@ -488,20 +487,18 @@ public class Conexion {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public Jugador getJugador(String jugador)
-			throws IOException, ClassNotFoundException, SQLException {
+	public Jugador getJugador(String jugador) throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Jugador jug = null;
-		String[] datos= new String[4];
 		String sentenciaSqle = "SELECT NOMBRE, POSICION, CALIDAD, PRECIO FROM JUGADOR WHERE NOMBRE= ?";
 		try {
 			connection = connectionByProp();
 			preparedStatement = connection.prepareStatement(sentenciaSqle);
 			preparedStatement.setString(1, jugador);
 			resultSet = preparedStatement.executeQuery();
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				jug = new Jugador("", "", 0, 0);
 				jug.setNombre(resultSet.getString("NOMBRE"));
 				jug.setPosicion(resultSet.getString("POSICION"));
@@ -509,7 +506,6 @@ public class Conexion {
 				jug.setPrecio(resultSet.getInt("PRECIO"));
 			}
 
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -538,6 +534,149 @@ public class Conexion {
 		}
 
 		return jug;
+	}
+
+	/**
+	 * Devuelve si el jugador pasado existe
+	 * 
+	 * @param jugador
+	 * @param usuario
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public boolean estaEnPlantilla(String jugador, String usuario)
+			throws IOException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		boolean existe = false;
+		String sentenciaSqle = "SELECT JUGADOR FROM PLANTILLA WHERE JUGADOR = ? AND USUARIO = ?";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, jugador);
+			preparedStatement.setString(2, usuario);
+			resultSet = preparedStatement.executeQuery();
+
+			if(resultSet.next()) {
+				existe = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return existe;
+	}
+	
+	/**
+	 * Borra al jugador de la plantilla
+	 * @param usuario
+	 * @param jug
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void venderJugador(String usuario, Jugador jug)
+			throws ClassNotFoundException, IOException, SQLException {
+		String jugador = jug.getNombre();
+		String sentenciaSql = "DELETE FROM PLANTILLA WHERE USUARIO = ? AND JUGADOR = ?";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			pStatement = connection.prepareStatement(sentenciaSql);
+			pStatement.setString(1, usuario); 
+			pStatement.setString(2, jugador); 
+			try {
+				pStatement.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Jugador vendido");
+			} catch (SQLException sqle) {
+				JOptionPane.showMessageDialog(null, "Fallo");
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement != null)
+				try {
+					pStatement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	
+	public void comprarJugador(String usuario, Jugador jug)
+			throws ClassNotFoundException, IOException, SQLException {
+		String jugador = jug.getNombre();
+		String sentenciaSql = "INSERT INTO PLANTILLA (USUARIO, JUGADOR) VALUES(?,?)";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			pStatement = connection.prepareStatement(sentenciaSql);
+			pStatement.setString(1, usuario); 
+			pStatement.setString(2, jugador); 
+			try {
+				pStatement.executeUpdate();
+				JOptionPane.showMessageDialog(null, "Jugador comprado");
+			} catch (SQLException sqle) {
+				JOptionPane.showMessageDialog(null, "Fallo");
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement != null)
+				try {
+					pStatement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 	}
 
 }

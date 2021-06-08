@@ -19,35 +19,35 @@
             <Image url="@../imagenes_varias/demacia.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="240.0" layoutY="453.0" mnemonicParsing="false" onAction="#entrar" opacity="0.9" prefHeight="39.0" prefWidth="270.0" style="-fx-background-color: #0F102C;" text="ENTRAR" textFill="WHITE">
+      <Button fx:id="btnEntrar" layoutX="240.0" layoutY="440.0" mnemonicParsing="false" onAction="#entrar" onMouseEntered="#mouseEnteredEntrar" onMouseExited="#mouseExitedEntrar" prefHeight="39.0" prefWidth="270.0" style="-fx-background-color: #0F102C;" text="ENTRAR" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
          <effect>
             <Bloom />
          </effect></Button>
-      <TextField fx:id="txtUsuario" layoutX="240.0" layoutY="304.0" opacity="0.9" prefHeight="39.0" prefWidth="270.0" promptText="Usuario..." style="-fx-background-color: #0F102C; -fx-text-fill: white;">
+      <TextField fx:id="txtUsuario" layoutX="240.0" layoutY="300.0" opacity="0.9" prefHeight="39.0" prefWidth="270.0" promptText="Nombre usuario" style="-fx-background-color: #0F102C; -fx-text-fill: white;">
          <font>
             <Font size="18.0" />
          </font>
          <effect>
             <Bloom />
          </effect></TextField>
-      <PasswordField fx:id="txtContraseña" layoutX="240.0" layoutY="365.0" opacity="0.9" prefHeight="39.0" prefWidth="270.0" promptText="Contraseña..." style="-fx-background-color: #0F102C; -fx-text-fill: white;">
+      <PasswordField fx:id="txtContraseña" layoutX="240.0" layoutY="370.0" opacity="0.9" prefHeight="39.0" prefWidth="270.0" promptText="Contraseña" style="-fx-background-color: #0F102C; -fx-text-fill: white;">
          <font>
             <Font size="18.0" />
          </font>
          <effect>
             <Bloom />
          </effect></PasswordField>
-      <Button layoutX="240.0" layoutY="507.0" mnemonicParsing="false" onAction="#goRegistro" opacity="0.9" prefHeight="39.0" prefWidth="270.0" style="-fx-background-color: #0F102C #0F102C;" text="REGISTRO" textFill="WHITE">
+      <Button fx:id="btnRegistro" layoutX="240.0" layoutY="510.0" mnemonicParsing="false" onAction="#goRegistro" onMouseEntered="#mouseEnteredRegistro" onMouseExited="#mouseExitedRegistro" prefHeight="39.0" prefWidth="270.0" style="-fx-background-color: #0F102C #0F102C;" text="REGISTRO" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
          <effect>
             <Bloom />
          </effect></Button>
-      <ImageView fitHeight="103.0" fitWidth="237.0" layoutX="37.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="103.0" fitWidth="237.0" layoutX="37.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes_varias/logo.png" />
          </image>
@@ -63,9 +63,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Circle fx:id="c1" fill="WHITE" layoutX="969.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="c2" fill="WHITE" layoutX="1028.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="c3" fill="WHITE" layoutX="1088.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c1" fill="WHITE" layoutX="969.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" onMouseEntered="#mouseEnteredAd1" onMouseExited="#mouseExitedAd1" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c2" fill="WHITE" layoutX="1028.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" onMouseEntered="#mouseEnteredAd2" onMouseExited="#mouseExitedAd2" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="c3" fill="WHITE" layoutX="1088.0" layoutY="362.0" onMouseClicked="#cambiaNoticia" onMouseEntered="#mouseEnteredAd3" onMouseExited="#mouseExitedAd3" opacity="0.9" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
       <ImageView fitHeight="150.0" fitWidth="158.0" layoutX="953.0" layoutY="425.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes_varias/lec.png" />

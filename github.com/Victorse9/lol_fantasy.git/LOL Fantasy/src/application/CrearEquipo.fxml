@@ -59,9 +59,9 @@
             <Image url="@../imagenes_escudos/liquid.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgE13" fitHeight="85.0" fitWidth="92.0" layoutX="594.0" layoutY="449.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgE13" fitHeight="85.0" fitWidth="92.0" layoutX="590.0" layoutY="450.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes_escudos/pain.png" />
+            <Image url="@../imagenes_escudos/omg.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgE4" fitHeight="85.0" fitWidth="92.0" layoutX="768.0" layoutY="230.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
@@ -71,7 +71,7 @@
       </ImageView>
       <ImageView fx:id="imgE9" fitHeight="85.0" fitWidth="92.0" layoutX="770.0" layoutY="338.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes_escudos/s2v.png" />
+            <Image url="@../imagenes_escudos/lsb.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgE14" fitHeight="85.0" fitWidth="92.0" layoutX="770.0" layoutY="446.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
@@ -84,9 +84,9 @@
             <Image url="@../imagenes_escudos/t1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgE10" fitHeight="85.0" fitWidth="92.0" layoutX="943.0" layoutY="341.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgE10" fitHeight="85.0" fitWidth="92.0" layoutX="954.0" layoutY="339.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../imagenes_escudos/tsm.png" />
+            <Image url="@../imagenes_escudos/drx.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imgE15" fitHeight="85.0" fitWidth="92.0" layoutX="946.0" layoutY="444.0" onMouseClicked="#clickEscudo" pickOnBounds="true" preserveRatio="true">
@@ -110,7 +110,7 @@
             <Bloom />
          </effect>
       </Label>
-      <TextField fx:id="txtNombreEquipo" layoutX="386.0" layoutY="99.0" prefHeight="39.0" prefWidth="287.0">
+      <TextField fx:id="txtNombreEquipo" layoutX="386.0" layoutY="99.0" prefHeight="39.0" prefWidth="232.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -190,14 +190,14 @@
             <Image url="@../imagenes_varias/marconeon.png" />
          </image>
       </ImageView>
-      <Button layoutX="521.0" layoutY="592.0" mnemonicParsing="false" onAction="#crearEquipo" prefHeight="51.0" prefWidth="232.0" style="-fx-background-color: #0F102C #0F102C;" text="EMPEZAR LIGA" textFill="WHITE">
+      <Button fx:id="btnEmpezar" layoutX="521.0" layoutY="601.0" mnemonicParsing="false" onAction="#crearEquipo" onMouseEntered="#mouseEntered" onMouseExited="#mouseExited" prefHeight="51.0" prefWidth="232.0" style="-fx-background-color: #0F102C #0F102C;" text="EMPEZAR LIGA" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
          <effect>
             <Bloom />
          </effect></Button>
-      <Label layoutX="508.0" layoutY="30.0" text="CREA TU NUEVO EQUIPO" textFill="WHITE">
+      <Label layoutX="494.0" layoutY="28.0" text="CREA TU NUEVO EQUIPO" textFill="WHITE" underline="true">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -205,7 +205,7 @@
             <Bloom />
          </effect>
       </Label>
-      <ImageView fitHeight="60.0" fitWidth="79.0" layoutX="27.0" layoutY="588.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="60.0" fitWidth="79.0" layoutX="1187.0" layoutY="22.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes_varias/flecha.png" />
          </image>

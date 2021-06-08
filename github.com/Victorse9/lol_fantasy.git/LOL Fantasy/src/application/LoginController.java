@@ -15,12 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 public class LoginController {
 	@FXML
-	private Button btnEntrar;
+	private Button btnEntrar, btnRegistro;
 	@FXML
 	private TextField txtUsuario, txtContraseña;
 	@FXML
@@ -34,7 +36,7 @@ public class LoginController {
 	public void initialize() {
 
 	}
-
+	
 	@FXML
 	public void entrar(ActionEvent event) throws Exception {
 		String nombreUsuario = txtUsuario.getText();
@@ -126,6 +128,53 @@ public class LoginController {
 			break;
 		}
 
+	}
+	
+	
+	@FXML
+	public void mouseEnteredEntrar(MouseEvent e) {
+		btnEntrar.setStyle("-fx-background-color: #1E1F39");
+	}
+	
+	@FXML
+	public void mouseExitedEntrar(MouseEvent e) { 	 
+		btnEntrar.setStyle("-fx-background-color: #0F102C");
+	}
+	@FXML
+	public void mouseEnteredRegistro(MouseEvent e) {
+		btnRegistro.setStyle("-fx-background-color: #1E1F39");
+	}
+	
+	@FXML
+	public void mouseExitedRegistro(MouseEvent e) { 	 
+		btnRegistro.setStyle("-fx-background-color: #0F102C");
+	}
+	@FXML
+	public void mouseEnteredAd1(MouseEvent e) {
+		c1.setOpacity(0.5);
+	}
+	
+	@FXML
+	public void mouseExitedAd1(MouseEvent e) { 	 
+		c1.setOpacity(0.9);
+	}
+	@FXML
+	public void mouseEnteredAd2(MouseEvent e) {
+		c2.setOpacity(0.5);
+	}
+	
+	@FXML
+	public void mouseExitedAd2(MouseEvent e) { 	 
+		c2.setOpacity(0.9);
+	}
+	@FXML
+	public void mouseEnteredAd3(MouseEvent e) {
+		c3.setOpacity(0.5);
+	}
+	
+	@FXML
+	public void mouseExitedAd3(MouseEvent e) { 	 
+		c3.setOpacity(0.9);
 	}
 
 }

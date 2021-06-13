@@ -12,6 +12,9 @@ import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import modelo.Clasificacion;
 import modelo.Jugador;
 import modelo.RegistroDatos;
 
@@ -65,10 +68,20 @@ public class Conexion {
 		}
 	}
 
+	/**
+	 * Establece el nombre del equipo y escudo
+	 * 
+	 * @param nombreEquipo
+	 * @param escudo
+	 * @param usuario
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
 	public void creaEquipo(String nombreEquipo, String escudo, String usuario)
 			throws ClassNotFoundException, IOException, SQLException {
 
-		String sentenciaSql = "UPDATE REGISTRO SET EQUIPO_EXISTE = 1, NOMBRE_EQUIPO = ?, ESCUDO = ? WHERE USUARIO = ?";
+		String sentenciaSql = "UPDATE REGISTRO SET EQUIPO_EXISTE = 1, NOMBRE_EQUIPO = ?, ESCUDO = ?, SALDO = 20000 WHERE USUARIO = ?";
 		PreparedStatement pStatement = null;
 		Connection connection = null;
 		try {
@@ -428,6 +441,14 @@ public class Conexion {
 		return escudoEquipo;
 	}
 
+	/**
+	 * Devuelve los jugadores iniciales
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public ArrayList<String> JugadorIniciales() throws IOException, ClassNotFoundException, SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -560,7 +581,7 @@ public class Conexion {
 			preparedStatement.setString(2, usuario);
 			resultSet = preparedStatement.executeQuery();
 
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				existe = true;
 			}
 		} catch (SQLException e) {
@@ -592,17 +613,17 @@ public class Conexion {
 
 		return existe;
 	}
-	
+
 	/**
 	 * Borra al jugador de la plantilla
+	 * 
 	 * @param usuario
 	 * @param jug
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public void venderJugador(String usuario, Jugador jug)
-			throws ClassNotFoundException, IOException, SQLException {
+	public void venderJugador(String usuario, Jugador jug) throws ClassNotFoundException, IOException, SQLException {
 		String jugador = jug.getNombre();
 		String sentenciaSql = "DELETE FROM PLANTILLA WHERE USUARIO = ? AND JUGADOR = ?";
 		PreparedStatement pStatement = null;
@@ -610,8 +631,8 @@ public class Conexion {
 		try {
 			connection = connectionByProp();
 			pStatement = connection.prepareStatement(sentenciaSql);
-			pStatement.setString(1, usuario); 
-			pStatement.setString(2, jugador); 
+			pStatement.setString(1, usuario);
+			pStatement.setString(2, jugador);
 			try {
 				pStatement.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Jugador vendido");
@@ -639,9 +660,17 @@ public class Conexion {
 			}
 		}
 	}
-	
-	public void comprarJugador(String usuario, Jugador jug)
-			throws ClassNotFoundException, IOException, SQLException {
+
+	/**
+	 * Inserta a la plantilla el jugador pasado
+	 * 
+	 * @param usuario
+	 * @param jug
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void comprarJugador(String usuario, Jugador jug) throws ClassNotFoundException, IOException, SQLException {
 		String jugador = jug.getNombre();
 		String sentenciaSql = "INSERT INTO PLANTILLA (USUARIO, JUGADOR) VALUES(?,?)";
 		PreparedStatement pStatement = null;
@@ -649,8 +678,8 @@ public class Conexion {
 		try {
 			connection = connectionByProp();
 			pStatement = connection.prepareStatement(sentenciaSql);
-			pStatement.setString(1, usuario); 
-			pStatement.setString(2, jugador); 
+			pStatement.setString(1, usuario);
+			pStatement.setString(2, jugador);
 			try {
 				pStatement.executeUpdate();
 				JOptionPane.showMessageDialog(null, "Jugador comprado");
@@ -679,4 +708,546 @@ public class Conexion {
 		}
 	}
 
+	/**
+	 * Crea la clasificacion con los equipos a 0 partidos
+	 * 
+	 * @param usuario
+	 * @param equipo
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void creaClasificacion(String usuario, String equipo)
+			throws ClassNotFoundException, IOException, SQLException {
+		String sentenciaSql = "INSERT INTO CLASIFICACION (USUARIO, EQUIPO, N_PARTIDO, PARTIDOS_GANADOS, ELIMINACIONES) VALUES(?,?, 1, 0, 0)";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			pStatement = connection.prepareStatement(sentenciaSql);
+			pStatement.setString(1, usuario);
+			pStatement.setString(2, equipo);
+			try {
+				pStatement.executeUpdate();
+			} catch (SQLException sqle) {
+				JOptionPane.showMessageDialog(null, "Fallo");
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement != null)
+				try {
+					pStatement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+
+	/**
+	 * Devuelve los partidos jugados
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public int getJornada(String usuario, String equipo) throws IOException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int n_partido = 0;
+		String sentenciaSqle = "SELECT DISTINCT N_PARTIDO FROM CLASIFICACION WHERE USUARIO = ? AND EQUIPO = ?";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, usuario);
+			preparedStatement.setString(2, equipo);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				n_partido = resultSet.getInt("N_PARTIDO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return n_partido;
+	}
+
+	/**
+	 * Devuelve la tabla de clasificacion ordenada
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public ObservableList<Clasificacion> getClasificacion(String usuario)
+			throws IOException, ClassNotFoundException, SQLException {
+		ObservableList<Clasificacion> lClasificacion = FXCollections.observableArrayList();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String sentenciaSqle = "SELECT EQUIPO, N_PARTIDO, PARTIDOS_GANADOS, ELIMINACIONES FROM CLASIFICACION WHERE USUARIO = ? ORDER BY PARTIDOS_GANADOS DESC, ELIMINACIONES DESC";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, usuario);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Clasificacion clasif = new Clasificacion();
+				clasif.setEquipo(resultSet.getString("EQUIPO"));
+				clasif.setN_partido((resultSet.getInt("n_partido"))-1);
+				clasif.setPartidos_ganados(resultSet.getInt("partidos_ganados"));
+				clasif.setEliminaciones(resultSet.getInt("eliminaciones"));
+				lClasificacion.add(clasif);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return lClasificacion;
+	}
+	
+	public String getGanador(String usuario)
+			throws IOException, ClassNotFoundException, SQLException {
+		String ganador = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String sentenciaSqle = "SELECT equipo FROM CLASIFICACION WHERE USUARIO = ? ORDER BY PARTIDOS_GANADOS DESC, ELIMINACIONES DESC limit 1";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, usuario);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				ganador = resultSet.getString("EQUIPO");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return ganador;
+	}
+
+	/**
+	 * Devuelve la calidad del equipo pasado
+	 * 
+	 * @param equipo
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public int getCalidadEquipo(String equipo) throws IOException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int calidad = 0;
+		String sentenciaSqle = "select sum(calidad) as CALIDAD from jugador where equipo = ?";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, equipo);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				calidad = resultSet.getInt("CALIDAD");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return calidad;
+	}
+
+	/**
+	 * Devuelve la calidad de los jugadores alineados
+	 * 
+	 * @param equipo
+	 * @param jugador1
+	 * @param jugador2
+	 * @param jugador3
+	 * @param jugador4
+	 * @param jugador5
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public int getCalidadAlineados(String usuario, String jugador1, String jugador2, String jugador3, String jugador4,
+			String jugador5) throws IOException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int calidad = 0;
+		String sentenciaSqle = "select sum((select calidad from jugador where nombre = p.jugador)) as CALIDAD from plantilla p where p.usuario = ? and (p.jugador = ? or p.jugador = ? or p.jugador = ? or p.jugador = ? or p.jugador = ?)";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, usuario);
+			preparedStatement.setString(2, jugador1);
+			preparedStatement.setString(3, jugador2);
+			preparedStatement.setString(4, jugador3);
+			preparedStatement.setString(5, jugador4);
+			preparedStatement.setString(6, jugador5);
+			resultSet = preparedStatement.executeQuery();
+
+			if (resultSet.next()) {
+				calidad = resultSet.getInt("CALIDAD");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return calidad;
+	}
+
+	/**
+	 * Actualiza la tabla clasificación
+	 * 
+	 * @param ganado
+	 * @param eliminaciones
+	 * @param usuario
+	 * @param equipo
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void updateClasificacion(int ganado, int eliminaciones, String usuario, String equipo)
+			throws ClassNotFoundException, IOException, SQLException {
+		String sentenciaSql = "UPDATE CLASIFICACION SET N_PARTIDO = N_PARTIDO+1, PARTIDOS_GANADOS = PARTIDOS_GANADOS+?, ELIMINACIONES = ELIMINACIONES+? WHERE USUARIO = ? AND EQUIPO = ?";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			pStatement = connection.prepareStatement(sentenciaSql);
+			pStatement.setInt(1, ganado);
+			pStatement.setInt(2, eliminaciones);
+			pStatement.setString(3, usuario);
+			pStatement.setString(4, equipo);
+			try {
+				pStatement.executeUpdate();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement != null)
+				try {
+					pStatement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+
+	/**
+	 * Elimina todos los datos de la liga del usuario pasado
+	 * 
+	 * @param usuario
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void eliminarLiga(String usuario) throws ClassNotFoundException, IOException, SQLException {
+		String sentenciaSql1 = "DELETE FROM PLANTILLA WHERE USUARIO = ?";
+		String sentenciaSql2 = "delete from clasificacion WHERE USUARIO = ?";
+		String sentenciaSql3 = "update registro set equipo_existe = null, nombre_equipo = null, escudo = null, saldo = null where usuario = ?";
+		PreparedStatement pStatement1 = null;
+		PreparedStatement pStatement2 = null;
+		PreparedStatement pStatement3 = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			// DELETE PLANTILLA
+			pStatement1 = connection.prepareStatement(sentenciaSql1);
+			pStatement1.setString(1, usuario);
+			// DELETE CLASIFICACION
+			pStatement2 = connection.prepareStatement(sentenciaSql2);
+			pStatement2.setString(1, usuario);
+			// DELETE REGISTRO
+			pStatement3 = connection.prepareStatement(sentenciaSql3);
+			pStatement3.setString(1, usuario);
+			try {
+				pStatement1.executeUpdate();
+				pStatement2.executeUpdate();
+				pStatement3.executeUpdate();
+			} catch (SQLException sqle) {
+				JOptionPane.showMessageDialog(null, "Fallo");
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement1 != null)
+				try {
+					pStatement1.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			if (pStatement2 != null)
+				try {
+					pStatement2.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			if (pStatement3 != null)
+				try {
+					pStatement3.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+
+	/**
+	 * Devuelve el saldo del usuario
+	 * 
+	 * @param usuario
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
+	public int getSaldo(String usuario) throws IOException, ClassNotFoundException, SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int saldo = 0;
+		String sentenciaSqle = "SELECT SALDO FROM REGISTRO WHERE USUARIO = ?";
+		try {
+			connection = connectionByProp();
+			preparedStatement = connection.prepareStatement(sentenciaSqle);
+			preparedStatement.setString(1, usuario);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				saldo = resultSet.getInt("SALDO");
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+					resultSet = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+			try {
+				if (preparedStatement != null) {
+					preparedStatement.close();
+					preparedStatement = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+			try {
+				if (connection != null) {
+					connection.close();
+					connection = null;
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+
+		return saldo;
+	}
+
+	/**
+	 * Actualiza el saldo al usuario por la cantidad pasada
+	 * 
+	 * @param usuario
+	 * @param cambioSaldo
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void actualizaSaldo(String usuario, int cambioSaldo)
+			throws ClassNotFoundException, IOException, SQLException {
+		String sentenciaSql = "update registro set saldo = saldo+? where usuario = ?";
+		PreparedStatement pStatement = null;
+		Connection connection = null;
+		try {
+			connection = connectionByProp();
+			pStatement = connection.prepareStatement(sentenciaSql);
+			pStatement.setInt(1, cambioSaldo);
+			pStatement.setString(2, usuario);
+			try {
+				pStatement.executeUpdate();
+			} catch (SQLException sqle) {
+				throw sqle;
+			}
+			connection.commit();
+		} catch (SQLException e) {
+			connection.rollback();
+			throw e;
+		} finally {
+			if (pStatement != null)
+				try {
+					pStatement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
 }

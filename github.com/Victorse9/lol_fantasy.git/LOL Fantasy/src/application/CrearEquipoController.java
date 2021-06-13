@@ -51,6 +51,18 @@ public class CrearEquipoController {
 				conexion.insertJugador(nombreUsuario, "Hadess");
 				conexion.insertJugador(nombreUsuario, "knighter");
 				conexion.insertJugador(nombreUsuario, "SendOo");
+				
+				// Inserts a la tabla clasificacion creando los equipos a 0 partidos
+				conexion.creaClasificacion(nombreUsuario, nombreEquipo);
+				conexion.creaClasificacion(nombreUsuario, "Schalke04");
+				conexion.creaClasificacion(nombreUsuario, "Misfits");
+				conexion.creaClasificacion(nombreUsuario, "MAD Lions");
+				conexion.creaClasificacion(nombreUsuario, "SK Gaming");
+				conexion.creaClasificacion(nombreUsuario, "Fnatic");
+				conexion.creaClasificacion(nombreUsuario, "G2 Esports");
+				conexion.creaClasificacion(nombreUsuario, "Vitality");
+				conexion.creaClasificacion(nombreUsuario, "Rogue");
+				conexion.creaClasificacion(nombreUsuario, "Astralis");	
 
 				// CARGA SIGUIENTE VENTANA
 				((Node) e.getSource()).getScene().getWindow().hide();

@@ -21,20 +21,26 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0f102c" height="719.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" width="1307.0" />
-      <Label fx:id="lblEquipo" layoutX="309.0" layoutY="49.0" prefHeight="25.0" prefWidth="187.0" text="EQUIPO" textFill="WHITE">
+      <Label fx:id="lblEquipo" layoutX="334.0" layoutY="49.0" prefHeight="25.0" prefWidth="187.0" text="EQUIPO" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
-      <Label fx:id="lblUsuario" layoutX="309.0" layoutY="16.0" prefHeight="25.0" prefWidth="187.0" text="USUARIO" textFill="WHITE">
+      <Label fx:id="lblUsuario" layoutX="337.0" layoutY="16.0" prefHeight="25.0" prefWidth="187.0" text="USUARIO" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
-      <ImageView fx:id="imgEscudo" fitHeight="70.0" fitWidth="79.0" layoutX="49.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgEscudo" fitHeight="70.0" fitWidth="79.0" layoutX="52.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
       <Pane fx:id="pMercado" layoutY="133.0" opacity="0.75" prefHeight="574.0" prefWidth="1294.0" style="-fx-background-color: WHITE;">
          <children>
-            <TableView fx:id="tablaMercado" layoutX="14.0" layoutY="104.0" prefHeight="457.0" prefWidth="563.0">
+            <TableView fx:id="tablaMercado" layoutX="14.0" layoutY="104.0" onMouseClicked="#cargaFotoMercado" prefHeight="457.0" prefWidth="563.0">
               <columns>
                 <TableColumn fx:id="cNombre" minWidth="25.0" prefWidth="170.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 15;" text="NOMBRE" />
                 <TableColumn fx:id="cPosicion" prefWidth="140.0" style="-fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 15;" text="POSICIÓN" />
@@ -42,7 +48,7 @@
                   <TableColumn fx:id="cPrecio" prefWidth="128.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 15;" text="PRECIO" />
               </columns>
             </TableView>
-            <TableView fx:id="tablaPlantilla" layoutX="717.0" layoutY="104.0" prefHeight="457.0" prefWidth="563.0">
+            <TableView fx:id="tablaPlantilla" layoutX="717.0" layoutY="104.0" onMouseClicked="#cargaFotoPlantilla" prefHeight="457.0" prefWidth="563.0">
               <columns>
                 <TableColumn fx:id="c2Nombre" prefWidth="170.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 15;" text="NOMBRE" />
                 <TableColumn fx:id="c2Posicion" minWidth="7.0" prefWidth="140.0" style="-fx-font-size: 15; -fx-font-weight: bold; -fx-alignment: CENTER;" text="POSICIÓN" />
@@ -60,14 +66,14 @@
                   <Image url="@../imagenes_varias/vender.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnComprar" layoutX="589.0" layoutY="326.0" mnemonicParsing="false" onAction="#comprar" prefHeight="44.0" prefWidth="119.0" style="-fx-background-color: #0F102C #0F102C;" text="COMPRAR" textFill="WHITE">
+            <Button fx:id="btnComprar" layoutX="589.0" layoutY="326.0" mnemonicParsing="false" onAction="#comprar" onMouseEntered="#mouseEnteredComprar" onMouseExited="#mouseExitedComprar" prefHeight="44.0" prefWidth="119.0" style="-fx-background-color: #0F102C #0F102C;" text="COMPRAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <effect>
                   <Bloom />
                </effect></Button>
-            <Button fx:id="btnVender" layoutX="588.0" layoutY="387.0" mnemonicParsing="false" onAction="#vender" prefHeight="44.0" prefWidth="119.0" style="-fx-background-color: #0F102C #0F102C;" text="VENDER" textFill="WHITE">
+            <Button fx:id="btnVender" layoutX="588.0" layoutY="387.0" mnemonicParsing="false" onAction="#vender" onMouseEntered="#mouseEnteredVender" onMouseExited="#mouseExitedVender" prefHeight="44.0" prefWidth="119.0" style="-fx-background-color: #0F102C #0F102C;" text="VENDER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -91,7 +97,7 @@
                   <Blend />
                </effect>
             </Label>
-            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="598.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgFoto" fitHeight="112.0" fitWidth="116.0" layoutX="593.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes_varias/lupa.png" />
                </image>
@@ -122,7 +128,7 @@
                   <TableColumn fx:id="c3Precio" prefWidth="128.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 15;" text="PRECIO" />
               </columns>
             </TableView>
-            <Button layoutX="606.0" layoutY="322.0" mnemonicParsing="false" onAction="#alinear" prefHeight="44.0" prefWidth="128.0" style="-fx-background-color: #0F102C #0F102C;" text="ALINEAR" textFill="WHITE">
+            <Button fx:id="btnAlinear" layoutX="607.0" layoutY="252.0" mnemonicParsing="false" onAction="#alinear" onMouseEntered="#mouseEnteredAlinear" onMouseExited="#mouseExitedAlinear" prefHeight="44.0" prefWidth="128.0" style="-fx-background-color: #0F102C #0F102C;" text="ALINEAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -150,7 +156,7 @@
                   <Bloom />
                </effect>
             </Label>
-            <Label fx:id="lblAdc" layoutX="1091.0" layoutY="486.0" prefHeight="35.0" prefWidth="142.0" text="ADC" textFill="WHITE">
+            <Label fx:id="lblAdc" layoutX="1082.0" layoutY="433.0" prefHeight="35.0" prefWidth="142.0" text="ADC" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -158,7 +164,7 @@
                   <Bloom />
                </effect>
             </Label>
-            <Label fx:id="lblSupport" layoutX="1091.0" layoutY="439.0" prefHeight="35.0" prefWidth="142.0" text="SUPPORT" textFill="WHITE">
+            <Label fx:id="lblSupport" layoutX="1082.0" layoutY="486.0" prefHeight="35.0" prefWidth="142.0" text="SUPPORT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -179,12 +185,12 @@
                   <Image url="@../imagenes_posiciones/top.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="1045.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="1036.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes_posiciones/adc.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="1045.0" layoutY="437.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="1036.0" layoutY="484.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes_posiciones/support.png" />
                </image>
@@ -214,18 +220,100 @@
                   <Image url="@../imagenes_varias/bordeDer.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="99.0" fitWidth="142.0" layoutX="603.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="99.0" fitWidth="142.0" layoutX="604.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes_varias/flechaAlinear.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="99.0" fitWidth="142.0" layoutX="603.0" layoutY="407.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="99.0" fitWidth="142.0" layoutX="604.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../imagenes_varias/flechaAlinear.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnSimular" layoutX="1055.0" layoutY="50.0" mnemonicParsing="false" onAction="#simular" onMouseEntered="#mouseEnteredSimular" onMouseExited="#mouseExitedSimular" prefHeight="44.0" prefWidth="214.0" style="-fx-background-color: #0F102C #0F102C;" text="SIMULAR PARTIDO" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Button>
+            <Label fx:id="lblJornada" alignment="CENTER" layoutX="718.0" layoutY="12.0" prefHeight="27.0" prefWidth="287.0" text="JORNADA 1" textFill="#0f102c">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgEquipo1" fitHeight="70.0" fitWidth="79.0" layoutX="726.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEquipo2" fitHeight="70.0" fitWidth="79.0" layoutX="916.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="848.0" layoutY="59.0" text="VS">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgEquipoMapa" fitHeight="70.0" fitWidth="79.0" layoutX="1143.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgEstrellas" fitHeight="99.0" fitWidth="164.0" layoutX="1103.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes_varias/5estrellas.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="601.0" layoutY="438.0" text="MEDIA ALINEADA:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgEstrellasJug" fitHeight="99.0" fitWidth="164.0" layoutX="592.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes_varias/5estrellas.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblMedia" layoutX="658.0" layoutY="463.0" text="0.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="83.0" text="TU PLANTILLA" textFill="#0f102c" underline="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </Label>
+            <ImageView fitHeight="60.0" fitWidth="63.0" layoutX="213.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes_varias/plantilla.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Pane fx:id="pClasificacion" layoutY="133.0" opacity="0.5" prefHeight="574.0" prefWidth="1294.0" style="-fx-background-color: BLUE;" visible="false" />
+      <Pane fx:id="pClasificacion" layoutY="133.0" opacity="0.75" prefHeight="574.0" prefWidth="1294.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <TableView fx:id="tablaClasificacion" layoutX="20.0" layoutY="86.0" onMouseClicked="#seleccionClasif" prefHeight="403.0" prefWidth="765.0">
+              <columns>
+                <TableColumn fx:id="clasifEquipo" prefWidth="199.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 18;" text="EQUIPO" />
+                <TableColumn fx:id="clasifGanados" prefWidth="198.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-alignment: CENTER;" text="PARTIDOS GANADOS" />
+                  <TableColumn fx:id="clasifEliminaciones" prefWidth="175.0" style="-fx-alignment: CENTER; -fx-font-weight: bold; -fx-font-size: 18;" text="ELIMINACIONES" />
+                  <TableColumn fx:id="clasifJugados" prefWidth="192.0" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-alignment: CENTER;" text="PARTIDOS JUGADOS" />
+              </columns>
+            </TableView>
+            <Label layoutX="35.0" layoutY="46.0" text="CLASIFICACIÓN" textFill="#0f102c" underline="true">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </Label>
+            <ImageView fx:id="imgClasifEscudo" fitHeight="321.0" fitWidth="288.0" layoutX="908.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes_rival/mad.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgClasifEstrellas" fitHeight="127.0" fitWidth="287.0" layoutX="908.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagenes_varias/4.5estrellas.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
       <Button fx:id="btnMercado" layoutY="89.0" mnemonicParsing="false" onAction="#cambiaPanel" onMouseEntered="#mouseEnteredMercado" onMouseExited="#mouseExitedMercado" prefHeight="39.0" prefWidth="426.6" style="-fx-background-color: #0F102C #0F102C;" text="MERCADO" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -249,20 +337,55 @@
             <Bloom />
          </effect>
       </Button>
-      <ImageView fitHeight="60.0" fitWidth="79.0" layoutX="1187.0" layoutY="22.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="64.0" layoutX="1202.0" layoutY="25.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes_varias/flecha.png" />
          </image>
       </ImageView>
       <Label fx:id="lblUsuario1" layoutX="176.0" layoutY="16.0" text="Nombre usuario:" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
       <Label fx:id="lblUsuario11" layoutX="176.0" layoutY="49.0" text="Nombre equipo:" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
+      <Label fx:id="lblEliminarLiga" layoutX="1011.0" layoutY="36.0" onMouseClicked="#eliminaLiga" onMouseEntered="#mouseEnteredEliminar" onMouseExited="#mouseExitedEliminar" text="ELIMINAR LIGA" textFill="RED">
+         <font>
+            <Font name="System Bold Italic" size="18.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <Label fx:id="lblUsuario12" layoutX="537.0" layoutY="33.0" text="SALDO:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <Label fx:id="lblOro" layoutX="622.0" layoutY="33.0" prefHeight="27.0" prefWidth="70.0" text="30000" textFill="#3fd750">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <effect>
+            <Bloom />
+         </effect>
+      </Label>
+      <ImageView fitHeight="44.0" fitWidth="39.0" layoutX="692.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes_varias/oro.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -53,7 +53,7 @@
             <Image url="@../imagenes_varias/logo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="60.0" fitWidth="79.0" layoutX="1187.0" layoutY="22.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="64.0" layoutX="1202.0" layoutY="13.0" onMouseClicked="#volver" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes_varias/flecha.png" />
          </image>
